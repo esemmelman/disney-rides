@@ -28,6 +28,15 @@ test("multiple filters in a group are combined", () => {
   assert.deepEqual(filterRides(rides, new Set(["DL", "CA", "2"])).map((ride) => ride.name), ["B"]);
 });
 
+test("every filtered result is alphabetical by name", () => {
+  const unsorted = [rides[2], rides[0], rides[1]];
+  assert.deepEqual(filterRides(unsorted, new Set(["DL", "CA"])).map((ride) => ride.name), [
+    "A",
+    "B",
+    "C",
+  ]);
+});
+
 test("each filter toggles independently", () => {
   const withDl = toggleFilter(new Set(), "DL");
   const withDlAndOne = toggleFilter(withDl, "1");

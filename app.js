@@ -1,4 +1,4 @@
-import { filterLabel, filterRides, toggleFilter } from "./filters.js?v=1.2.0";
+import { filterLabel, filterRides, toggleFilter } from "./filters.js?v=1.2.1";
 
 const SUPABASE_URL = "https://fgomaujsdblpzxhnnqrg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JOUqLZDnfGu_yCa6k6FVDQ_AYwpr72i";
@@ -148,7 +148,7 @@ async function loadRides() {
   try {
     const [response, selections] = await Promise.all([
       fetch(
-        `${SUPABASE_URL}/rest/v1/disney_rides_v1?select=id,name,rank,park&order=park.desc,rank.asc,name.asc`,
+        `${SUPABASE_URL}/rest/v1/disney_rides_v1?select=id,name,rank,park&order=name.asc`,
         { headers: apiHeaders(), cache: "no-store" },
       ),
       fetchSelections(),

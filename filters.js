@@ -6,11 +6,13 @@ export function filterRides(rides, activeFilters) {
   const parks = ["DL", "CA"].filter((park) => selected.has(park));
   const ranks = ["1", "2"].filter((rank) => selected.has(rank));
 
-  return rides.filter((ride) => {
-    const matchesPark = parks.length === 0 || parks.includes(ride.park);
-    const matchesRank = ranks.length === 0 || ranks.includes(String(ride.rank));
-    return matchesPark && matchesRank;
-  });
+  return rides
+    .filter((ride) => {
+      const matchesPark = parks.length === 0 || parks.includes(ride.park);
+      const matchesRank = ranks.length === 0 || ranks.includes(String(ride.rank));
+      return matchesPark && matchesRank;
+    })
+    .sort((first, second) => first.name.localeCompare(second.name, undefined, { sensitivity: "base" }));
 }
 
 export function toggleFilter(activeFilters, clickedFilter) {
