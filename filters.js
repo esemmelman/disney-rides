@@ -1,16 +1,22 @@
-export const ALL_FILTERS = ["DL", "CA", "1", "2"];
+export const ALL_FILTERS = ["DL", "CA", "1", "2", "YES", "NO"];
 
-export function filterRides(rides, activeFilters) {
+export function filterRides(rides, activeFilters, completedRideIds = new Set()) {
   const selected = new Set(activeFilters);
   if (selected.size === 0) return [];
   const parks = ["DL", "CA"].filter((park) => selected.has(park));
   const ranks = ["1", "2"].filter((rank) => selected.has(rank));
+  const completionStatuses = ["YES", "NO"].filter((status) => selected.has(status));
 
   return rides
     .filter((ride) => {
       const matchesPark = parks.length === 0 || parks.includes(ride.park);
       const matchesRank = ranks.length === 0 || ranks.includes(String(ride.rank));
-      return matchesPark && matchesRank;
+      const isComplete = completedRideIds.has(String(ride.id));
+      const matchesCompletion =
+        completionStatuses.length === 0 ||
+        (completionStatuses.includes("YES") && isComplete) ||
+        (completionStatuses.includes("NO") && !isComplete);
+      return matchesPark && matchesRank && matchesCompletion;
     })
     .sort((first, second) => first.name.localeCompare(second.name, undefined, { sensitivity: "base" }));
 }
@@ -28,6 +34,8 @@ export function filterLabel(activeFilters) {
     CA: "California Adventure",
     1: "Priority one",
     2: "Priority two",
+    YES: "Completed",
+    NO: "Not completed",
   };
   const selectedLabels = ALL_FILTERS.filter((filter) => activeFilters.has(filter)).map(
     (filter) => labels[filter],

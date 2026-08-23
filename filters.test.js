@@ -3,10 +3,11 @@ import assert from "node:assert/strict";
 import { filterLabel, filterRides, toggleFilter } from "./filters.js";
 
 const rides = [
-  { name: "A", park: "DL", rank: 1 },
-  { name: "B", park: "DL", rank: 2 },
-  { name: "C", park: "CA", rank: 1 },
+  { id: 1, name: "A", park: "DL", rank: 1 },
+  { id: 2, name: "B", park: "DL", rank: 2 },
+  { id: 3, name: "C", park: "CA", rank: 1 },
 ];
+const completedRideIds = new Set(["2", "3"]);
 
 test("no filter displays no rides", () => {
   assert.deepEqual(filterRides(rides, new Set()), []);
@@ -35,6 +36,38 @@ test("every filtered result is alphabetical by name", () => {
     "B",
     "C",
   ]);
+});
+
+test("Yes shows only completed rides", () => {
+  assert.deepEqual(
+    filterRides(rides, new Set(["YES"]), completedRideIds).map((ride) => ride.name),
+    ["B", "C"],
+  );
+});
+
+test("No shows only incomplete rides", () => {
+  assert.deepEqual(
+    filterRides(rides, new Set(["NO"]), completedRideIds).map((ride) => ride.name),
+    ["A"],
+  );
+});
+
+test("completion, park, and rank filters combine", () => {
+  assert.deepEqual(
+    filterRides(rides, new Set(["DL", "1", "NO"]), completedRideIds).map(
+      (ride) => ride.name,
+    ),
+    ["A"],
+  );
+});
+
+test("selecting both completion filters includes both statuses", () => {
+  assert.deepEqual(
+    filterRides(rides, new Set(["DL", "YES", "NO"]), completedRideIds).map(
+      (ride) => ride.name,
+    ),
+    ["A", "B"],
+  );
 });
 
 test("each filter toggles independently", () => {

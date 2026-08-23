@@ -1,4 +1,4 @@
-import { filterLabel, filterRides, toggleFilter } from "./filters.js?v=1.2.1";
+import { filterLabel, filterRides, toggleFilter } from "./filters.js?v=1.3.0";
 
 const SUPABASE_URL = "https://fgomaujsdblpzxhnnqrg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JOUqLZDnfGu_yCa6k6FVDQ_AYwpr72i";
@@ -41,7 +41,7 @@ function renderFilters() {
 }
 
 function renderRides() {
-  const visibleRides = filterRides(rides, activeFilters);
+  const visibleRides = filterRides(rides, activeFilters, completedRideIds);
   rideList.replaceChildren(...visibleRides.map(createRideItem));
   rideCount.textContent = `${visibleRides.length} ${visibleRides.length === 1 ? "attraction" : "attractions"}`;
 }

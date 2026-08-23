@@ -64,7 +64,7 @@ h2 {
 
 .filters {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   margin-bottom: 42px;
 }
@@ -254,6 +254,7 @@ h2 {
   }
 
   .filters {
+    grid-template-columns: repeat(3, 1fr);
     gap: 7px;
     margin-bottom: 28px;
   }
