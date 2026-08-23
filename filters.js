@@ -23,8 +23,13 @@ export function filterRides(rides, activeFilters, completedRideIds = new Set()) 
 
 export function toggleFilter(activeFilters, clickedFilter) {
   const next = new Set(activeFilters);
-  if (next.has(clickedFilter)) next.delete(clickedFilter);
-  else next.add(clickedFilter);
+  if (next.has(clickedFilter)) {
+    next.delete(clickedFilter);
+  } else {
+    if (clickedFilter === "YES") next.delete("NO");
+    if (clickedFilter === "NO") next.delete("YES");
+    next.add(clickedFilter);
+  }
   return next;
 }
 

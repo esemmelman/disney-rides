@@ -61,13 +61,12 @@ test("completion, park, and rank filters combine", () => {
   );
 });
 
-test("selecting both completion filters includes both statuses", () => {
-  assert.deepEqual(
-    filterRides(rides, new Set(["DL", "YES", "NO"]), completedRideIds).map(
-      (ride) => ride.name,
-    ),
-    ["A", "B"],
-  );
+test("Yes and No toggle each other off", () => {
+  const withYes = toggleFilter(new Set(["DL"]), "YES");
+  const withNo = toggleFilter(withYes, "NO");
+  assert.deepEqual([...withYes], ["DL", "YES"]);
+  assert.deepEqual([...withNo], ["DL", "NO"]);
+  assert.equal(withNo.has("YES"), false);
 });
 
 test("each filter toggles independently", () => {
