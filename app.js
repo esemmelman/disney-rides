@@ -1,4 +1,4 @@
-import { filterLabel, filterRides, toggleFilter } from "./filters.js?v=1.3.0";
+import { filterRides, toggleFilter } from "./filters.js?v=1.3.1";
 
 const SUPABASE_URL = "https://fgomaujsdblpzxhnnqrg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JOUqLZDnfGu_yCa6k6FVDQ_AYwpr72i";
@@ -8,7 +8,6 @@ const SELECTIONS_ENDPOINT = `${SUPABASE_URL}/rest/v1/disney_ride_selections_v1`;
 const rideList = document.querySelector("#ride-list");
 const status = document.querySelector("#status");
 const rideCount = document.querySelector("#ride-count");
-const filterLabelElement = document.querySelector("#filter-label");
 const filterButtons = [...document.querySelectorAll(".filter-button")];
 
 let rides = [];
@@ -37,7 +36,6 @@ function renderFilters() {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
-  filterLabelElement.textContent = filterLabel(activeFilters);
 }
 
 function renderRides() {
