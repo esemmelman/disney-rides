@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { filterLabel, filterRides, nextFilter } from "./filters.js";
+import { filterLabel, filterRides, toggleFilter } from "./filters.js";
 
 const rides = [
   { name: "A", park: "DL", rank: 1 },
@@ -9,19 +9,30 @@ const rides = [
 ];
 
 test("no filter displays every ride", () => {
-  assert.deepEqual(filterRides(rides, null), rides);
+  assert.deepEqual(filterRides(rides, new Set()), rides);
 });
 
 test("park filters select only their park", () => {
-  assert.deepEqual(filterRides(rides, "CA").map((ride) => ride.name), ["C"]);
+  assert.deepEqual(filterRides(rides, new Set(["CA"])).map((ride) => ride.name), ["C"]);
 });
 
 test("rank filters select only their rank", () => {
-  assert.deepEqual(filterRides(rides, "1").map((ride) => ride.name), ["A", "C"]);
+  assert.deepEqual(filterRides(rides, new Set(["1"])).map((ride) => ride.name), ["A", "C"]);
 });
 
-test("clicking the active filter restores all filters", () => {
-  assert.equal(nextFilter("DL", "DL"), null);
-  assert.equal(nextFilter(null, "DL"), "DL");
-  assert.equal(filterLabel(null), "All attractions");
+test("park and rank filters can be combined", () => {
+  assert.deepEqual(filterRides(rides, new Set(["DL", "1"])).map((ride) => ride.name), ["A"]);
+});
+
+test("multiple filters in a group are combined", () => {
+  assert.deepEqual(filterRides(rides, new Set(["DL", "CA", "2"])).map((ride) => ride.name), ["B"]);
+});
+
+test("each filter toggles independently", () => {
+  const withDl = toggleFilter(new Set(), "DL");
+  const withDlAndOne = toggleFilter(withDl, "1");
+  assert.deepEqual([...withDlAndOne], ["DL", "1"]);
+  assert.deepEqual([...toggleFilter(withDlAndOne, "DL")], ["1"]);
+  assert.equal(filterLabel(new Set()), "All attractions");
+  assert.equal(filterLabel(withDlAndOne), "Disneyland · Priority one");
 });

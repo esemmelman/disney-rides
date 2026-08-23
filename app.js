@@ -1,4 +1,4 @@
-import { ALL_FILTERS, filterLabel, filterRides, nextFilter } from "./filters.js";
+import { filterLabel, filterRides, toggleFilter } from "./filters.js";
 
 const SUPABASE_URL = "https://fgomaujsdblpzxhnnqrg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JOUqLZDnfGu_yCa6k6FVDQ_AYwpr72i";
@@ -11,7 +11,7 @@ const filterLabelElement = document.querySelector("#filter-label");
 const filterButtons = [...document.querySelectorAll(".filter-button")];
 
 let rides = [];
-let activeFilter = null;
+let activeFilters = new Set();
 let completedRideIds = loadCompletedRideIds();
 
 function loadCompletedRideIds() {
@@ -28,22 +28,22 @@ function saveCompletedRideIds() {
 }
 
 function setFilter(filter) {
-  activeFilter = nextFilter(activeFilter, filter);
+  activeFilters = toggleFilter(activeFilters, filter);
   renderFilters();
   renderRides();
 }
 
 function renderFilters() {
   filterButtons.forEach((button) => {
-    const isActive = activeFilter === null || button.dataset.filter === activeFilter;
+    const isActive = activeFilters.has(button.dataset.filter);
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
-  filterLabelElement.textContent = filterLabel(activeFilter);
+  filterLabelElement.textContent = filterLabel(activeFilters);
 }
 
 function renderRides() {
-  const visibleRides = filterRides(rides, activeFilter);
+  const visibleRides = filterRides(rides, activeFilters);
   rideList.replaceChildren(...visibleRides.map(createRideItem));
   rideCount.textContent = `${visibleRides.length} ${visibleRides.length === 1 ? "attraction" : "attractions"}`;
 }

@@ -71,6 +71,16 @@ h1 {
   font-size: 1.05rem;
 }
 
+.version {
+  margin: 0 3px 9px 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
 .filters {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -163,7 +173,7 @@ h1 {
 
 .ride-toggle {
   display: grid;
-  grid-template-columns: 31px minmax(0, 1fr) auto;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
   align-items: center;
   gap: 15px;
   width: 100%;
@@ -181,8 +191,8 @@ h1 {
 }
 
 .oval {
-  width: 31px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border: 2px solid #90a097;
   border-radius: 999px;
   background: transparent;
@@ -286,13 +296,21 @@ h1 {
   }
 
   .ride-toggle {
-    grid-template-columns: 31px minmax(0, 1fr);
+    grid-template-columns: 24px minmax(0, 1fr);
     padding: 16px 20px;
   }
 
   .ride-meta {
     display: none;
   }
+}
+
+.android .hero {
+  display: none;
+}
+
+.android .app-shell {
+  padding-top: 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {

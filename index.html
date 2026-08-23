@@ -9,6 +9,9 @@
       content="A simple Disneyland and Disney California Adventure ride checklist."
     />
     <title>Park List</title>
+    <script>
+      if (/Android/i.test(navigator.userAgent)) document.documentElement.classList.add("android");
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,23 +26,25 @@
       <header class="hero">
         <p class="eyebrow">A day at the parks</p>
         <h1>What’s next?</h1>
-        <p class="intro">Filter the list, then tap the oval as you go.</p>
+        <p class="intro">Filter the list, then tap the circle as you go.</p>
       </header>
 
+      <p class="version" aria-label="App version 1.1.0">v1.1.0</p>
+
       <nav class="filters" aria-label="Filter rides">
-        <button class="filter-button is-active" type="button" data-filter="DL" aria-pressed="true">
+        <button class="filter-button" type="button" data-filter="DL" aria-pressed="false">
           <span>DL</span>
           <small>Disneyland</small>
         </button>
-        <button class="filter-button is-active" type="button" data-filter="CA" aria-pressed="true">
+        <button class="filter-button" type="button" data-filter="CA" aria-pressed="false">
           <span>CA</span>
           <small>California Adventure</small>
         </button>
-        <button class="filter-button is-active" type="button" data-filter="1" aria-pressed="true">
+        <button class="filter-button" type="button" data-filter="1" aria-pressed="false">
           <span>1</span>
           <small>Priority one</small>
         </button>
-        <button class="filter-button is-active" type="button" data-filter="2" aria-pressed="true">
+        <button class="filter-button" type="button" data-filter="2" aria-pressed="false">
           <span>2</span>
           <small>Priority two</small>
         </button>

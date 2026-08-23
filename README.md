@@ -2,6 +2,8 @@
 
 A lightweight Disneyland and Disney California Adventure ride checklist. Ride data is read from the `disney_rides_v1` table in Supabase; completed rides are saved in the browser's local storage.
 
+Current version: **1.1.0**
+
 ## Run locally
 
 Because the app uses JavaScript modules, serve the directory over HTTP rather than opening `index.html` directly. For example:
