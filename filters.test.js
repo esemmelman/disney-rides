@@ -8,8 +8,8 @@ const rides = [
   { name: "C", park: "CA", rank: 1 },
 ];
 
-test("no filter displays every ride", () => {
-  assert.deepEqual(filterRides(rides, new Set()), rides);
+test("no filter displays no rides", () => {
+  assert.deepEqual(filterRides(rides, new Set()), []);
 });
 
 test("park filters select only their park", () => {
@@ -33,6 +33,6 @@ test("each filter toggles independently", () => {
   const withDlAndOne = toggleFilter(withDl, "1");
   assert.deepEqual([...withDlAndOne], ["DL", "1"]);
   assert.deepEqual([...toggleFilter(withDlAndOne, "DL")], ["1"]);
-  assert.equal(filterLabel(new Set()), "All attractions");
+  assert.equal(filterLabel(new Set()), "Select filters");
   assert.equal(filterLabel(withDlAndOne), "Disneyland · Priority one");
 });

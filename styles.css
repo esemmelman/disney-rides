@@ -37,11 +37,6 @@ button {
   padding: 72px 0 80px;
 }
 
-.hero {
-  margin-bottom: 36px;
-}
-
-.eyebrow,
 .section-kicker {
   margin: 0 0 8px;
   color: var(--green);
@@ -51,24 +46,10 @@ button {
   text-transform: uppercase;
 }
 
-h1,
 h2 {
   margin: 0;
   font-family: "Fraunces", serif;
   font-weight: 600;
-}
-
-h1 {
-  max-width: 620px;
-  font-size: clamp(3rem, 10vw, 6rem);
-  line-height: 0.95;
-  letter-spacing: -0.055em;
-}
-
-.intro {
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 1.05rem;
 }
 
 .version {
@@ -190,16 +171,20 @@ h1 {
   background: rgba(255, 255, 255, 0.6);
 }
 
-.oval {
+.circle {
   width: 24px;
   height: 24px;
+  min-width: 24px;
+  aspect-ratio: 1 / 1;
+  display: block;
+  padding: 0;
   border: 2px solid #90a097;
-  border-radius: 999px;
+  border-radius: 50%;
   background: transparent;
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
-.ride-toggle:hover .oval {
+.ride-toggle:hover .circle {
   transform: scale(1.06);
   border-color: var(--green);
 }
@@ -219,7 +204,7 @@ h1 {
   text-transform: uppercase;
 }
 
-.ride-item.is-complete .oval {
+.ride-item.is-complete .circle {
   border-color: var(--green);
   background: var(--green);
   box-shadow: inset 0 0 0 4px #e8efe9;
@@ -268,10 +253,6 @@ h1 {
     padding: 42px 0 48px;
   }
 
-  .hero {
-    margin-left: 8px;
-  }
-
   .filters {
     gap: 7px;
     margin-bottom: 28px;
@@ -303,14 +284,6 @@ h1 {
   .ride-meta {
     display: none;
   }
-}
-
-.android .hero {
-  display: none;
-}
-
-.android .app-shell {
-  padding-top: 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {

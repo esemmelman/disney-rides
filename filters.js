@@ -2,6 +2,7 @@ export const ALL_FILTERS = ["DL", "CA", "1", "2"];
 
 export function filterRides(rides, activeFilters) {
   const selected = new Set(activeFilters);
+  if (selected.size === 0) return [];
   const parks = ["DL", "CA"].filter((park) => selected.has(park));
   const ranks = ["1", "2"].filter((rank) => selected.has(rank));
 
@@ -29,5 +30,5 @@ export function filterLabel(activeFilters) {
   const selectedLabels = ALL_FILTERS.filter((filter) => activeFilters.has(filter)).map(
     (filter) => labels[filter],
   );
-  return selectedLabels.length ? selectedLabels.join(" · ") : "All attractions";
+  return selectedLabels.length ? selectedLabels.join(" · ") : "Select filters";
 }

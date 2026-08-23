@@ -1,8 +1,8 @@
 # Park List
 
-A lightweight Disneyland and Disney California Adventure ride checklist. Ride data is read from the `disney_rides_v1` table in Supabase; completed rides are saved in the browser's local storage.
+A lightweight Disneyland and Disney California Adventure ride checklist. Ride data and the shared completed-ride checklist are stored in Supabase so selections persist across devices.
 
-Current version: **1.1.0**
+Current version: **1.2.0**
 
 ## Run locally
 
@@ -24,4 +24,4 @@ npm test
 
 Push these files to a GitHub repository, then open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, select the main branch and the root folder, and save.
 
-The Supabase publishable key in `app.js` is designed for browser use. Database access is restricted by grants and Row Level Security: public clients can read the ride list but cannot modify it.
+The Supabase publishable key in `app.js` is designed for browser use. Database access is restricted by grants and Row Level Security. The ride catalog is read-only; the shared checklist allows public read, insert, and delete access so it can sync without user accounts.
