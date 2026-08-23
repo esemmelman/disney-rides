@@ -69,6 +69,14 @@ test("Yes and No toggle each other off", () => {
   assert.equal(withNo.has("YES"), false);
 });
 
+test("rank 1 and rank 2 toggle each other off", () => {
+  const withOne = toggleFilter(new Set(["DL"]), "1");
+  const withTwo = toggleFilter(withOne, "2");
+  assert.deepEqual([...withOne], ["DL", "1"]);
+  assert.deepEqual([...withTwo], ["DL", "2"]);
+  assert.equal(withTwo.has("1"), false);
+});
+
 test("each filter toggles independently", () => {
   const withDl = toggleFilter(new Set(), "DL");
   const withDlAndOne = toggleFilter(withDl, "1");

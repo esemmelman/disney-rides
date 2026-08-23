@@ -1,4 +1,4 @@
-import { filterRides, toggleFilter } from "./filters.js?v=1.3.3";
+import { filterRides, toggleFilter } from "./filters.js?v=1.3.4";
 
 const SUPABASE_URL = "https://fgomaujsdblpzxhnnqrg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JOUqLZDnfGu_yCa6k6FVDQ_AYwpr72i";

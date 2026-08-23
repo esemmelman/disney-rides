@@ -2,7 +2,7 @@
 
 A lightweight Disneyland and Disney California Adventure ride checklist. Ride data and the shared completed-ride checklist are stored in Supabase so selections persist across devices.
 
-Current version: **1.3.3**
+Current version: **1.3.4**
 
 ## Run locally
 

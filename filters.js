@@ -26,6 +26,8 @@ export function toggleFilter(activeFilters, clickedFilter) {
   if (next.has(clickedFilter)) {
     next.delete(clickedFilter);
   } else {
+    if (clickedFilter === "1") next.delete("2");
+    if (clickedFilter === "2") next.delete("1");
     if (clickedFilter === "YES") next.delete("NO");
     if (clickedFilter === "NO") next.delete("YES");
     next.add(clickedFilter);
